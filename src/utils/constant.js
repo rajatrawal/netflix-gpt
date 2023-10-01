@@ -4,10 +4,14 @@ export const API_OPT = {
     method: 'GET',
     headers: {
         accept: 'application/json',
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4OTg1NzI0OGM5ZWZkNzIwOTU4NmYwZjYwMWQ0NjIzZSIsInN1YiI6IjYxYWIzYWQ4ZDhjYzRhMDA2MDY3Zjk1YSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ZsGdZL-EPPiwInk2BVGHBN4r2atGlmQUuO6L0YWcRpQ'
+        Authorization: 'Bearer ' + process.env.REACT_APP_TOCKEN
     }
 };
 
 export const IMAGE_URL = "https://image.tmdb.org/t/p/w500/";
 
 export const SUPPORTED_LAGUAGES = ["english", "hindi", "spanish"];
+
+export const API_KEY = process.env.REACT_APP_API_KEY;
+
+export const SEARCH_QUERY = "https://api.themoviedb.org/3/search/movie?query=";

@@ -1,13 +1,13 @@
-import logo from './logo.svg';
+
 import './App.css';
 import Body from './components/bodyComponent/Body';
 import { Provider } from 'react-redux';
-import appStore from './utils/userStore';
+import appStore from './utils/store/userStore';
 
 
 function App() {
   return (
-    <div className="App">
+    <div className="App bg-black">
       <Provider store={appStore}>
 
         <Body />

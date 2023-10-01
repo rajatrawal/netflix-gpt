@@ -5,7 +5,7 @@ import { checkValidation } from "../../utils/validation";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import auth from "../../utils/firebase";
 import { useDispatch } from "react-redux";
-import { addUser } from "../../utils/userSlice";
+import { addUser } from "../../utils/store/userSlice";
 
 
 const Login = () => {
@@ -53,9 +53,9 @@ const Login = () => {
                 })
                 .catch((error) => {
                     const errorCode = error.code;
-                    const errorMessage = error.message;
 
-                    if (errorCode == "auth/email-already-in-use") {
+
+                    if (errorCode === "auth/email-already-in-use") {
                         setError("User with this email is already exist !");
                     }
                 });
@@ -65,14 +65,14 @@ const Login = () => {
             signInWithEmailAndPassword(auth, email.current.value, password.current.value,)
                 .then((userCredential) => {
                     // Signed in 
-                    const user = userCredential.user;
+
 
                     // ...
                 })
                 .catch((error) => {
                     const errorCode = error.code;
-                    const errorMessage = error.message;
-                    if (errorCode == "auth/invalid-login-credentials") {
+
+                    if (errorCode === "auth/invalid-login-credentials") {
                         setError("Invalid email or password");
 
                     }
@@ -90,9 +90,9 @@ const Login = () => {
 
             </div>
 
-            <div className="formDiv p-8 rounded-md">
+            <div className="formDiv sm:p-8 p-4 rounded-md w-11/12 sm:w-6/12">
 
-                <div className="text-4xl font-bold mb-8 text-white">Sign {isSignUpForm ? "Up" : "In"} </div>
+                <div className="sm:text-4xl text-3xl font-bold mb-8 text-white">Sign {isSignUpForm ? "Up" : "In"} </div>
 
                 {error &&
                     <div className="bg-yellow-300 font-bold  mb-5 p-3 rounded text-yellow-900">{error}</div>

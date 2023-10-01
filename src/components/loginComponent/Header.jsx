@@ -4,12 +4,12 @@ import { signOut } from "firebase/auth";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
-import { addUser, removeUser } from '../../utils/userSlice';
-import { changeGPTSearchView } from "../../utils/gptSlice";
+import { addUser, removeUser } from '../../utils/store/userSlice';
+import { changeGPTSearchView } from "../../utils/store/gptSlice";
 import { useDispatch } from "react-redux";
 import { LOGO, SUPPORTED_LAGUAGES } from "../../utils/constant";
-import { changeLanguage } from "../../utils/lagnSlice";
-
+import { changeLanguage } from "../../utils/store/lagnSlice";
+import { Link } from "react-router-dom";
 
 
 const Header = () => {
@@ -27,7 +27,7 @@ const Header = () => {
         navigate('/browse');
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/auth.user
-        const { uid, displayName, email, phoneNumber } = user;
+        const { uid, displayName, email } = user;
 
 
         dispatch(addUser(
@@ -58,7 +58,7 @@ const Header = () => {
   const GPTSearchStatus = useSelector(store => store.gpt.GPTSearchView);
 
   const handleLangChange = (e) => {
-    console.log(e.target.value);
+
     dispatch(changeLanguage(e.target.value))
   }
 
@@ -72,22 +72,23 @@ const Header = () => {
 
 
   return (
-    <div className=" absolute z-10 w-full ">
+    <div className=" absolute z-50 w-full ">
 
-      <div className="flex justify-between items-center p-2">
+      <div className="flex flex-wrap sm:justify-between items-center p-2 justify-center">
         <div className="">
 
-          <a href="">
+          <Link to="/browse">
 
-            <img src={LOGO} alt="netflix" className="w-40 " />
-          </a>
+            <img src={LOGO} alt="netflix" className="sm:w-40 w-28" />
+          </Link>
+
 
         </div>
 
         {user &&
-          <div>
+          <div >
             {GPTSearchStatus &&
-              <select name="" onClick={handleLangChange} id="" className="px-2 capitalize py-1 mr-4 outline-none rounded bg-cyan-950  text-cyan-600  border-cyan-600 border-2">
+              <select name="" onClick={handleLangChange} id="" className="sm:px-2 px-1 capitalize py-0.5 mr-4 text-sm outline-none rounded bg-cyan-950  text-cyan-600  border-cyan-600 border-2">
                 {SUPPORTED_LAGUAGES.map((data) => (
                   <option value={data} key={data} className="capitalize">{data}</option>
 
@@ -95,8 +96,8 @@ const Header = () => {
 
               </select>
             }
-            <button className="px-3 py-1 bg-cyan-950 text-cyan-600 border-cyan-600 border-2 mr-4 rounded text-sm font-bold " onClick={handleGPTBtn}>{GPTSearchStatus ? "Homepage" : "GPT Search"}</button>
-            <button className="px-3 py-1 bg-red-600 text-white mr-4 rounded text-sm font-bold " onClick={handleSignOut}>Sign Out</button>
+            <button className="px-2 py-1 bg-cyan-950 text-cyan-600 border-cyan-600 border-2 mr-4 rounded text-sm sm:font-bold " onClick={handleGPTBtn}>{GPTSearchStatus ? "Home" : "GPT Search"}</button>
+            <button className="px-2 py-1 bg-red-600 text-white mr-4 rounded text-sm sm:font-bold " onClick={handleSignOut}>Sign Out</button>
           </div>
         }
       </div>

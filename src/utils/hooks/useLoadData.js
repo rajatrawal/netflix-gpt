@@ -1,18 +1,17 @@
 import { API_OPT } from "../constant";
-import { useDispatch } from "react-redux";
-import { addMoviesList, addNowPlayingMovies } from "../moviesSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addMoviesList } from "../store/moviesSlice";
 import { useEffect } from "react";
 
 const useLoadData = () => {
-
+    const nowPlayingMovies = useSelector(store => store.movies.nowPlayingMovies);
     const dispatch = useDispatch();
     const movieAPIList = [
         { title: 'now playing movies', url: "movie/now_playing" },
         { title: 'popular movies', url: "movie/popular" },
         { title: 'top rated movies', url: "movie/top_rated" },
         { title: 'upcoming movies', url: "movie/upcoming" },
-        { title: 'popular tv series', url: "tv/popular" },
-        { title: 'top rated tv series', url: "tv/top_rated" },
+
 
     ]
     const getNowPlayingMovies = async (title, url) => {
@@ -23,9 +22,10 @@ const useLoadData = () => {
 
     }
     useEffect(() => {
-        for (let url of movieAPIList) {
-
-            getNowPlayingMovies(url.title, url.url);
+        if (!nowPlayingMovies) {
+            for (let url of movieAPIList) {
+                getNowPlayingMovies(url.title, url.url);
+            }
         }
 
     }, [])

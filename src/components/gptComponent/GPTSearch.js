@@ -1,13 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 import GPTSearchBar from './GPTSearchBar'
 import GPTSuggetions from './GPTSuggetions'
-const GPTSearch = () => {
-    return (
-        <div className='bg-slate-950 w-full h-screen'>
-            <div className='pt-20'>
+import { useSelector } from 'react-redux'
+import GPTKey from './GPTKey'
+import MessageDiv from './MessageDiv'
 
-                <GPTSearchBar />
-                <GPTSuggetions />
+const GPTSearch = () => {
+    const key = useSelector(store => store.gpt.key);
+    const [message, setMessage] = useState(null);
+    return (
+        <div className='bg-slate-950 w-full min-h-screen '>
+            <div className='pt-36'>
+                {
+                    key ?
+                        <>
+                            <GPTSearchBar apiKey={key} setMessage={setMessage} />
+                            <GPTSuggetions />
+                        </> : <GPTKey setMessage={setMessage} />
+                }
+                {
+                    message && <MessageDiv message={message} />
+                }
             </div>
         </div>
     )
