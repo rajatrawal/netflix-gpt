@@ -88,7 +88,7 @@ const Header = () => {
         {user &&
           <div >
             {GPTSearchStatus &&
-              <select name="" onClick={handleLangChange} id="" className="sm:px-2 px-1 capitalize py-0.5 mr-4 text-sm outline-none rounded bg-cyan-950  text-cyan-600  border-cyan-600 border-2">
+              <select name="" onChange={handleLangChange} id="" className="sm:px-2 px-1 capitalize py-0.5 mr-4 text-sm outline-none rounded bg-cyan-950  text-cyan-600  border-cyan-600 border-2">
                 {SUPPORTED_LAGUAGES.map((data) => (
                   <option value={data} key={data} className="capitalize">{data}</option>
 
