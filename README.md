@@ -1,4 +1,4 @@
-# Netflix GPT
+# Netflix GPT Project in Namaste React Web Series By Akshay Saini
 
 [![GitHub Repository](https://img.shields.io/badge/GitHub%20Repo-Netflix%20GPT-green)](https://github.com/rajatrawal/netflix-gpt)
 [![Firebase Deployment](https://img.shields.io/badge/Live-Demo)](https://netflixgpt-a347f.web.app/browse)
